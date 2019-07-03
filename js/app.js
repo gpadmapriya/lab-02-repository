@@ -16,15 +16,8 @@ const Animal = function (title, image_url, description, keyword, horns) {
 Animal.getAnimalsFromFile = function () {
   const filePath = './data/page-1.json';
   const fileType = 'json';
-  $.get(filePath, fileType).then(myAnimals => {
-
-    myAnimals.forEach((el) => {
-      new Animal(el.title, el.image_url, el.description, el.keyword, el.horns);
-    })
-    renderUniqueKeywords(allAnimals);
-    animalRender(allAnimals);
-
-  });
+  $.get(filePath, fileType).then(initialize);
+  // $.get(filePath, fileType).then(a => {return a});
 }
 
 const animalRender = (arrayOfImages) => {
@@ -71,14 +64,33 @@ const renderUniqueKeywords = (arrayOfImages) => {
   renderKeywordScroll(keyWords);
 }
 
-$(document).ready(function () {
-  Animal.getAnimalsFromFile();
-  console.log($('select'));
+const initialize = myAnimals => {
+
+  myAnimals.forEach((el) => {
+    new Animal(el.title, el.image_url, el.description, el.keyword, el.horns);
+  })
+  renderUniqueKeywords(allAnimals);
+  animalRender(allAnimals);
+
+
   $('select').on('change', function () {
     console.log('in selection');
-    // let $selected = $(this).val();
-    // $('main > section').hide();
-    // $(`main > section > img[alt=${$selected}`).show();
+    let selected = $(this).val();
+    $('main > section').hide();
+    const $images = $(`main > section > img[alt=${selected}`)
+    const $sectionsOfTargetedImages = $images.parent()
+    $sectionsOfTargetedImages.show();
+    $(`main > section > img[alt=${selected}`).parent().show();
   });
+
+  console.log($('select'));
+
+
+}
+
+
+$(document).ready(function () {
+  Animal.getAnimalsFromFile();
+
 })
 
