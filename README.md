@@ -15,8 +15,8 @@ Number and name of feature: Feature #2: Filter images
 
 Estimate of time needed to complete: 1 hour
 
-Start time:  am
+Start time:  11 am
 
 Finish time:  am
 
-Actual time needed to complete: 1 hour 20 mins
+Actual time needed to complete: We were not able to finish this lab. Continued later and finished it. Total time taken - 2 hours 30 mins
