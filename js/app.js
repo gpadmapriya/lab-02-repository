@@ -16,17 +16,27 @@ const Animal = function (title, image_url, description, keyword, horns) {
 Animal.getAnimalsFromFile = function () {
   const filePath = './data/page-1.json';
   const fileType = 'json';
-  $.get(filePath, fileType).then(myAnimals => {
-
-    myAnimals.forEach((el) => {
-      new Animal(el.title, el.image_url, el.description, el.keyword, el.horns);
-    })
-    renderUniqueKeywords(allAnimals);
-    animalRender(allAnimals);
-
-  });
+  $.get(filePath, fileType).then(initialize);
 }
 
+const initialize = (myAnimals) => {
+  myAnimals.forEach((el) => {
+    new Animal(el.title, el.image_url, el.description, el.keyword, el.horns);
+  })
+  renderUniqueKeywords(allAnimals);
+  animalRender(allAnimals);
+  $('select').on('change', function () {
+    let selected = $(this).val();
+    if (selected === 'All') {
+      $('#photo-template').siblings().remove();
+      animalRender(allAnimals);
+    } else {
+      $('main > section').hide();
+      $(`main > section > img[alt=${selected}`).parent().show();
+    }
+  });
+
+};
 const animalRender = (arrayOfImages) => {
 
   arrayOfImages.forEach((el) => {
@@ -41,23 +51,19 @@ const animalRender = (arrayOfImages) => {
     $('main').append($newImage);
 
   });
-
+  $('#photo-template').hide();
 }
 
 const renderKeywordScroll = (arrayOfImages) => {
-  const $keyworddropdown = $('<select></select>');
-  //const keyworddropdown = $('#keyword-dropdown').html();
-  //let $keyworddropdown;
-  //$keyworddropdown.html(keyworddropdown);
-  //console.log($keyworddropdown);
+  const $keyworddropdown = $('select');
+  $keyworddropdown.append($('<option />').val('All').text('All'));
   arrayOfImages.forEach((el) => {
     $keyworddropdown.append($('<option />').val(el).text(el));
 
   });
-  $('header').append($keyworddropdown);
+  //$('header').append($keyworddropdown);
 
 }
-
 
 const renderUniqueKeywords = (arrayOfImages) => {
   const keyWords = [];
@@ -73,12 +79,5 @@ const renderUniqueKeywords = (arrayOfImages) => {
 
 $(document).ready(function () {
   Animal.getAnimalsFromFile();
-  console.log($('select'));
-  $('select').on('change', function () {
-    console.log('in selection');
-    // let $selected = $(this).val();
-    // $('main > section').hide();
-    // $(`main > section > img[alt=${$selected}`).show();
-  });
 })
 

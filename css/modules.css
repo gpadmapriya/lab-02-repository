@@ -1,0 +1,30 @@
+main {
+  overflow: hidden;
+  margin: auto;
+  max-height: 1750px;
+}
+
+section {
+  float: left;
+  border: 1px solid black;
+  height: 250px;
+  width: 250px;
+}
+
+img {
+  max-width: 75px;
+  padding-left: 70px;
+} 
+
+h2 {
+  max-width: 200px;
+  text-align: center;
+  font-family: 'Abel', sans-serif;
+}
+
+p {
+  max-width: 200px;
+  text-align: center;
+  font-family: 'Patrick Hand', sans-serif;
+
+}
