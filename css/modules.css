@@ -1,10 +1,11 @@
 main {
   overflow: hidden;
   margin: auto;
-  max-height: 1750px;
+  height: 1475px;
   display: flex;
-  flex-flow: row wrap;
-  justify-content: center;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-content: center;
 }
 
 section {
